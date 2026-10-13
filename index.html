@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Accreditation & Empanelment Services</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* General Reset & Variables */
+        :root {
+            --primary-color: #005b96;
+            --secondary-color: #03396c;
+            --accent-color: #28a745;
+            --text-color: #333;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; background-color: var(--white); overflow-x: hidden; }
+        
+        /* Navigation */
+        header { 
+            background: #fff; 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08); 
+        }
+        .logo { font-size: 22px; font-weight: 700; color: var(--primary-color); }
+        .nav-container { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: 0.3s; font-size: 15px; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .btn-appoint { background: var(--primary-color); color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; transition: 0.3s; display: inline-block; }
+        .btn-appoint:hover { background: var(--secondary-color); }
+        
+        .menu-toggle { display: none; font-size: 24px; color: var(--secondary-color); cursor: pointer; background: none; border: none; }
+
+        /* Hero Section */
+        #home { 
+            background: linear-gradient(rgba(0,91,150,0.85), rgba(3,57,108,0.85)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80') center/cover; 
+            color: white; 
+            padding: 90px 5%; 
+            text-align: center; 
+        }
+        #home h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 20px; font-weight: 700; }
+        #home p { font-size: clamp(1rem, 2.5vw, 1.25rem); margin-bottom: 30px; max-width: 750px; margin-left: auto; margin-right: auto; }
+        
+        /* Sections Shared */
+        section { padding: 60px 5%; }
+        .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 12px; color: var(--secondary-color); font-weight: 700; }
+        .section-subtitle { text-align: center; font-size: 1rem; color: #666; margin-bottom: 40px; }
+
+        /* Profile About Section */
+        #profile-about { background: #fff; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; }
+        .profile-img-container { flex: 1 1 300px; max-width: 380px; text-align: center; }
+        .profile-img-container img { width: 100%; max-width: 320px; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); object-fit: cover; }
+        .profile-details { flex: 2 1 320px; }
+        .profile-details h2 { color: var(--primary-color); font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 5px; }
+        .profile-details h3 { color: #555; font-size: 1.2rem; margin-bottom: 20px; font-weight: 600; }
+        .profile-details p { font-size: 1.05rem; margin-bottom: 15px; color: #555; }
+
+        /* About US (General) */
+        #about { background: var(--bg-light); text-align: center; }
+
+        /* Services */
+        #services { background: #fff; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .service-card { background: #fff; padding: 30px 20px; border-radius: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: 0.3s; border: 1px solid var(--border-color); }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        .service-card i { font-size: 38px; color: var(--primary-color); margin-bottom: 15px; }
+        
+        /* Gallery */
+        #gallery { background: var(--bg-light); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .gallery-grid img { width: 100%; height: 230px; object-fit: cover; border-radius: 8px; transition: 0.3s; }
+        .gallery-grid img:hover { transform: scale(1.02); }
+        
+        /* Reviews Section */
+        #reviews { background: #fff; padding-bottom: 30px; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .review-card { background: var(--bg-light); padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.04); text-align: center; border: 1px solid var(--border-color); }
+        .review-card .stars { color: #ffc107; margin-bottom: 12px; font-size: 18px; }
+        .review-text { font-style: italic; margin-bottom: 15px; color: #555; font-size: 0.95rem; }
+        .reviewer-name { font-weight: bold; color: var(--primary-color); }
+
+        /* Satisfied Clients Counter Bar */
+        .stats-section {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: #fff;
+            padding: 40px 5%;
+            margin-top: 30px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            text-align: center;
+        }
+        .stat-item h3 { font-size: 2.3rem; font-weight: 700; margin-bottom: 5px; color: #ffdd57; }
+        .stat-item p { font-size: 1rem; letter-spacing: 0.5px; opacity: 0.95; font-weight: 500; }
+
+        /* Doctor & Hospital Client List Section */
+        #doctor-clients { background: var(--bg-light); }
+        .client-filter-bar { display: flex; justify-content: center; margin-bottom: 25px; }
+        .search-client-box { width: 100%; max-width: 480px; padding: 12px 18px; border: 1px solid #ccc; border-radius: 25px; outline: none; font-size: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        
+        .client-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .dr-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 22px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .dr-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+        }
+        .dr-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
+        }
+        .dr-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+        .dr-icon {
+            background: #e8f3fa;
+            color: var(--primary-color);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .dr-name { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 3px; }
+        .dr-spec { font-size: 0.85rem; font-weight: 600; color: #0284c7; text-transform: uppercase; letter-spacing: 0.5px; }
+        .hospital-info { margin-top: 8px; padding-top: 10px; border-top: 1px dashed var(--border-color); font-size: 0.95rem; }
+        .hospital-name { font-weight: 600; color: #334155; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .hospital-name i { color: #64748b; font-size: 13px; }
+        .dr-location { color: #64748b; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .dr-location i { color: #ef4444; font-size: 13px; }
+
+        /* FAQ */
+        #faq { background: #fff; }
+        .faq-item { background: var(--bg-light); margin-bottom: 12px; padding: 18px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border-color); }
+        .faq-question { font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { margin-top: 12px; display: none; color: #555; font-size: 0.95rem; }
+        
+        /* Appointment & Contact */
+        #appointment { display: flex; flex-wrap: wrap; gap: 40px; background: var(--bg-light); }
+        .contact-info, .appointment-form { flex: 1 1 320px; }
+        form { display: flex; flex-direction: column; gap: 14px; }
+        input, select, textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; font-size: 14px; background: #fff; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-color); }
+        button[type="submit"] { background: var(--accent-color); color: white; padding: 14px; border: none; border-radius: 6px; font-size: 15px; cursor: pointer; font-weight: 700; transition: 0.3s; }
+        button[type="submit"]:hover { background: #218838; }
+        
+        /* Map */
+        .map-container iframe { width: 100%; height: 320px; border: none; border-radius: 8px; }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.25); z-index: 1000; text-decoration: none; transition: 0.3s; }
+        .whatsapp-float:hover { background: #1ebe57; transform: scale(1.08); }
+
+        /* Footer */
+        footer { background: var(--secondary-color); color: white; padding: 40px 5% 20px; text-align: center; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 25px; gap: 25px; text-align: left; }
+        .footer-content h3 { margin-bottom: 12px; font-size: 1.1rem; }
+        .footer-content ul { list-style: none; }
+        .footer-content li { margin-bottom: 8px; }
+        .footer-content a { color: #cbd5e1; text-decoration: none; transition: 0.3s; font-size: 0.95rem; }
+        .footer-content a:hover { color: white; }
+
+        /* Responsive Breakpoints (Phone, Tablet, Laptop) */
+        @media (max-width: 900px) {
+            header { padding: 12px 5%; }
+            .menu-toggle { display: block; }
+            .nav-container {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 20px 5%;
+                box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .nav-container.active { display: flex; }
+            nav ul { flex-direction: column; width: 100%; align-items: flex-start; gap: 12px; }
+            .btn-appoint { width: 100%; text-align: center; }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 45px 5%; }
+            .profile-img-container img { max-width: 240px; }
+            .stats-section { grid-template-columns: repeat(2, 1fr); padding: 25px 4%; gap: 18px; }
+            .stat-item h3 { font-size: 1.8rem; }
+            .client-card-grid { grid-template-columns: 1fr; }
+            .whatsapp-float { bottom: 18px; right: 18px; width: 50px; height: 50px; font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="logo">Chirag Consultancy</div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-container" id="navContainer">
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#profile-about">Profile</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#doctor-clients">Clients</a></li>
+                    <li><a href="#appointment">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#appointment" class="btn-appoint">Book Appointment</a>
+        </div>
+    </header>
+
+    <!-- Home / Hero Section -->
+    <section id="home">
+        <h1>Expert Healthcare Accreditations & Empanelment</h1>
+        <p>Complete NABH, NABL, Ayushman Bharat & GIC solutions by industry experts.</p>
+        <a href="#profile-about" class="btn-appoint" style="background: var(--accent-color);">Know More</a>
+    </section>
+
+    <!-- Profile About Section -->
+    <section id="profile-about">
+        <div class="profile-img-container">
+            <img src="ChiragDivakar.jpeg" alt="Chirag Divakar">
+        </div>
+        <div class="profile-details">
+            <h2>Chirag Divakar</h2>
+            <h3>BA | MHA | Healthcare Consultant</h3>
+            <p><strong>About Me:</strong></p>
+            <p>Main ek experienced healthcare consultant hoon, aur mera aim hospitals aur clinics ko unke accreditation goals achieve karne me madad karna hai. Ek strong healthcare background (BA | MHA) ke sath, main complex documentation aur compliance processes ko simple aur efficient banata hoon.</p>
+            <p>Chahe woh NABH/NABL standards implement karna ho, ya Ayushman Bharat aur GIC empanelment ke liye apply karna ho, main end-to-end support provide karta hoon taaki aapka healthcare facility smoothly aur successfully upgrade ho sake.</p>
+        </div>
+    </section>
+
+    <!-- General About Us -->
+    <section id="about">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div style="max-width: 800px; margin: auto;">
+            <p>Humari consultancy service aapke hospital ke infrastructure, processes, aur quality standards ko improve karne par focus karti hai. Hum personalized strategies banate hain jo aapki specific zaruraton ke hisaab se hoti hain, ensuring a high success rate in all accreditations and empanelments.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-hospital"></i>
+                <h3>NABH Accreditation</h3>
+                <p>Complete documentation, staff training, and audit preparation for NABH Entry Level and Full Accreditation.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-microscope"></i>
+                <h3>NABL Accreditation</h3>
+                <p>Ensuring your laboratories meet ISO 15189 standards with end-to-end NABL consultancy.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Ayushman Bharat</h3>
+                <p>Hassle-free empanelment services for the PM-JAY Ayushman Bharat scheme.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>GIC Empanelment</h3>
+                <p>Assistance in getting your hospital tied up with major General Insurance Companies & TPAs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=800&q=80" alt="Hospital Setup">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="Lab Setup">
+            <img src="https://images.unsplash.com/photo-1538108149393-cebb47acddb2?auto=format&fit=crop&w=800&q=80" alt="Consultation">
+            <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=800&q=80" alt="Hospital Setup">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="Lab Setup">
+            <img src="https://images.unsplash.com/photo-1538108149393-cebb47acddb2?auto=format&fit=crop&w=800&q=80" alt="Consultation">
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews">
+        <h2 class="section-title">Client Reviews</h2>
+        <p class="section-subtitle">Read what healthcare leaders say about our consulting and compliance work</p>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Chirag sir's guidance made our NABH accreditation process so smooth. Highly recommended for any hospital looking to upgrade."</p>
+                <p class="reviewer-name">- Dr. M.C Sharma, Raj Nursing Home </p>
+            </div>
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">"Got our Ayushman Bharat empanelment done very quickly. The documentation support was excellent."</p>
+                <p class="reviewer-name">- Manager, Apex Care Clinic</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Very professional approach towards NABL compliance. Cleared all our doubts patiently."</p>
+                <p class="reviewer-name">- Chief Pathologist, MedLab Diagnostics</p>
+            </div>
+        </div>
+
+        <!-- Numbers / Satisfied Clients Stats Bar (Directly below reviews) -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <h3>150+</h3>
+                <p>Satisfied Clients</p>
+            </div>
+            <div class="stat-item">
+                <h3>18+</h3>
+                <p>Associated Hospitals</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Documentation Support</p>
+            </div>
+            <div class="stat-item">
+                <h3>99%</h3>
+                <p>Empanelment Success</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Satisfied Clients / Doctor & Hospital List Section -->
+    <section id="doctor-clients">
+        <h2 class="section-title">Our Associated Doctors & Hospitals</h2>
+        <p class="section-subtitle">Prominent healthcare professionals and hospital networks trusted our guidance</p>
+
+        <!-- Search Bar for Client Filter -->
+        <div class="client-filter-bar">
+            <input type="text" id="clientSearch" class="search-client-box" placeholder="Search doctor, hospital, or city..." onkeyup="filterClients()">
+        </div>
+
+        <div class="client-card-grid" id="clientGrid">
+            <!-- 1. Dr Atil kumar lal -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Atil Kumar Lal</div>
+                            <div class="dr-spec">Orthopedic</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Meditre Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Gorakhpur, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Dr Deepak -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Deepak</div>
+                            <div class="dr-spec">Orthopedic Surgeon</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Maurya Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Ayodhya, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Dr Zyan perkash Verma -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Zyan Perkash Verma</div>
+                            <div class="dr-spec">General Surgeon</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Kalyan Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Ayodhya, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Dr Mayank kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Mayank Kumar</div>
+                            <div class="dr-spec">Consultant Doctor</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Shri Bankey Bihari Ji Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Pilkhuwa, Ghaziabad</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Dr Parvesh kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Parvesh Kumar</div>
+                            <div class="dr-spec">Consultant Doctor</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Sai Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Guwahati, Assam</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Dr Priyank kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Priyank Kumar</div>
+                            <div class="dr-spec">Orthopedic Surgeon</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Healthcare Facility</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Hapur, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Dr Mc sharma -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. M.C. Sharma</div>
+                            <div class="dr-spec">General Surgeon</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Raj Nursing Home (राज नर्सिंग होम)</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Hapur, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Dr Neeraj kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Neeraj Kumar</div>
+                            <div class="dr-spec">Healthcare Consultant</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> SD Health Care</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Dholna, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Dr Asth -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Asth</div>
+                            <div class="dr-spec">ENT Specialist</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Asth Eye Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Ayodhya, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Dr Sachin -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Sachin</div>
+                            <div class="dr-spec">Consultant Physician</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Delhi Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Dr Sandeep Kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Sandeep Kumar</div>
+                            <div class="dr-spec">Wellness Specialist</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Global Health Care & Wellness Center</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Faridabad, Haryana</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Dr Chandna -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Chandna</div>
+                            <div class="dr-spec">Gynecologist</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Needan Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Uttar Pradesh</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. Krishan mohan singh -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-hospital-user"></i></div>
+                        <div>
+                            <div class="dr-name">Krishan Mohan Singh</div>
+                            <div class="dr-spec">Hospital Administrator</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Shri Raja Ram Multispecialty Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Narela, Delhi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. Samiullah khan -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-hospital-user"></i></div>
+                        <div>
+                            <div class="dr-name">Samiullah Khan</div>
+                            <div class="dr-spec">Hospital Management</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Medicover Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Gorakhpur, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. Dr Anil kumar -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Anil Kumar</div>
+                            <div class="dr-spec">Consultant Doctor</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Siddhi Vinayak Hospital</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Pilkhuwa, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16. Dr Rawat -->
+            <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Rawat</div>
+                            <div class="dr-spec">Medical Specialist</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> Radha Krishan Hospital (राधा कृष्ण)</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Mathura, UP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 17. Dr Jain -->
+            <!-- <div class="dr-card">
+                <div>
+                    <div class="dr-header">
+                        <div class="dr-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <div class="dr-name">Dr. Jain</div>
+                            <div class="dr-spec">General Surgeon</div>
+                        </div>
+                    </div>
+                    <div class="hospital-info">
+                        <div class="hospital-name"><i class="fas fa-hospital-alt"></i> SN Medicover</div>
+                        <div class="dr-location"><i class="fas fa-map-marker-alt"></i> Mathura, UP</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div style="max-width: 800px; margin: auto;">
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">NABH accreditation me kitna time lagta hai? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Normally, Entry Level NABH me 3-6 mahine aur Full NABH me 9-12 mahine ka samay lag sakta hai, depending on hospital readiness.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">Ayushman empanelment ke liye basic requirements kya hain? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Minimum bed criteria, fire NOC, Bio-Medical Waste authorization, aur basic infrastructure ka hona zaroori hai. Details ke liye humse sampark karein.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">GIC tie-up ke kya fayde hain? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Insurance tie-ups se aapke hospital me patient footfall badhta hai aur cashless treatment facility ki wajah se patients ko convenience milti hai.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment & Map Section -->
+    <section id="appointment">
+       <div class="appointment-form">
+    <h2 style="margin-bottom: 20px; color: var(--secondary-color);">Book an Appointment</h2>
+    <form id="appointmentForm">
+        <input type="text" id="custName" placeholder="Full Name" required>
+        <input type="email" id="custEmail" placeholder="Email Address" required>
+        <input type="tel" id="custPhone" placeholder="Phone Number" required>
+        <select id="custService" required>
+            <option value="" disabled selected>Select Service Required</option>
+            <option value="NABH Consultancy">NABH Consultancy</option>
+            <option value="NABL Consultancy">NABL Consultancy</option>
+            <option value="Ayushman Empanelment">Ayushman Empanelment</option>
+            <option value="GIC / TPA Empanelment">GIC / TPA Empanelment</option>
+        </select>
+        <input type="date" id="custDate" required>
+        <textarea id="custMessage" rows="4" placeholder="Your Message / Hospital Details" required></textarea>
+        <button type="submit"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+    </form>
+</div>
+        
+        <div class="contact-info">
+            <h2 style="margin-bottom: 20px; color: var(--secondary-color);">Our Location & Contact</h2>
+            <p><i class="fas fa-map-marker-alt"></i> Narela Gali No. 203, Ward No. 4, New Delhi, India</p>
+            <p><i class="fas fa-phone"></i> +91 95573 19117</p>
+            <p><i class="fas fa-envelope"></i> nabh.chirag@gmail.com</p>
+            <br>
+            <div class="map-container">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.560072831699!2d77.17616007456834!3d28.52288078905332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1e09465213c1%3A0x3122f49e2991f1f0!2s203%2C%20Ward%20Number%204%2C%20Roopam%20Wala%20Kunwa%2C%20Mehrauli%2C%20New%20Delhi%2C%20Delhi%20110030!5e0!3m2!1sen!2sin!4v1791867807784!5m2!1sen!2sin" 
+                  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+               </iframe>
+           </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919557319117?text=Hi,%20Chirag!%20I%20need%20details%20about%20your%20services." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>HealthConsult by Chirag</h3>
+                <p>Your trusted partner for Healthcare<br> Accreditations & Empanelments.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#profile-about">About Chirag</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#doctor-clients">Clients</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <ul style="display: flex; gap: 15px; font-size: 20px; margin-top: 10px;">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border-color: #475569; margin-bottom: 15px;">
+        <p>&copy; 2026 Chirag Divakar (HealthConsult). All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Toggle FAQ answers
+        function toggleFAQ(element) {
+            let answer = element.querySelector('.faq-answer');
+            let icon = element.querySelector('.fa-chevron-down');
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                answer.style.display = "block";
+                icon.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // Mobile Nav Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navContainer = document.getElementById('navContainer');
+        menuToggle.addEventListener('click', () => {
+            navContainer.classList.toggle('active');
+        });
+
+        // Close Mobile Menu on Nav Item Click
+        document.querySelectorAll('nav ul li a').forEach(item => {
+            item.addEventListener('click', () => {
+                if(window.innerWidth <= 900) {
+                    navContainer.classList.remove('active');
+                }
+            });
+        });
+
+        // Real-time Search Filter for Doctors & Hospitals
+        function filterClients() {
+            let input = document.getElementById('clientSearch').value.toLowerCase();
+            let cards = document.querySelectorAll('#clientGrid .dr-card');
+            
+            cards.forEach(card => {
+                let cardText = card.innerText.toLowerCase();
+                if(cardText.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Aapka WhatsApp number (country code ke sath, bina + ya space ke)
+    const phoneNumber = "919557319117"; 
+
+    // Form se values lena
+    const name = document.getElementById('custName').value.trim();
+    const email = document.getElementById('custEmail').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const service = document.getElementById('custService').value;
+    const date = document.getElementById('custDate').value;
+    const message = document.getElementById('custMessage').value.trim();
+
+    // WhatsApp ke liye formatted message
+    const waText = `*New Appointment Request*%0A` +
+                   `--------------------------------%0A` +
+                   `*Name:* ${encodeURIComponent(name)}%0A` +
+                   `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                   `*Email:* ${encodeURIComponent(email)}%0A` +
+                   `*Service:* ${encodeURIComponent(service)}%0A` +
+                   `*Preferred Date:* ${encodeURIComponent(date)}%0A` +
+                   `*Hospital Details / Message:* ${encodeURIComponent(message)}`;
+
+    // WhatsApp open karna
+      const waURL = `https://wa.me/${phoneNumber}?text=${waText}`;
+      window.open(waURL, '_blank');
+    });
+    </script>
+</body>
+</html>
