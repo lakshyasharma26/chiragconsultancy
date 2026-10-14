@@ -22,7 +22,8 @@
     <meta property="og:title" content="Chirag Consultancy - Expert Healthcare Accreditations & Empanelment">
     <meta property="og:description" content="End-to-end NABH, NABL, Ayushman Bharat & GIC empanelment solutions for hospitals and clinics.">
     <meta property="og:image" content="https://chiragconsultancy.netlify.app/IMG_20220124_214934_.jpg">
-
+    <meta property="og:image" content="https://chiragconsultancy.netlify.app/IMG_20220124_214934_.jpg">
+    <meta property="twitter:image" content="https://chiragconsultancy.netlify.app/IMG_20220124_214934_.jpg">
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://chiragconsultancy.netlify.app/">
@@ -37,6 +38,8 @@
       "@type": "ProfessionalService",
       "name": "Chirag Consultancy",
       "image": "https://chiragconsultancy.netlify.app/IMG_20220124_214934_.jpg",
+      "image": "https://chiragconsultancy.netlify.app/images/img2.jpeg",
+      "logo": "https://chiragconsultancy.netlify.app/images/img2.jpeg",
       "@id": "https://chiragconsultancy.netlify.app/",
       "url": "https://chiragconsultancy.netlify.app/",
       "telephone": "+919557319117",
@@ -162,8 +165,7 @@
         
         /* Gallery */
         #gallery { background: var(--bg-light); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-        .gallery-grid img { width: 100%; height: 230px; object-fit: cover; border-radius: 8px; transition: 0.3s; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }.gallery-grid img { width: 100%; height: 230px; object-fit: cover; border-radius: 8px; transition: 0.3s; }
         .gallery-grid img:hover { transform: scale(1.02); }
         
         /* Reviews Section */
@@ -325,6 +327,9 @@ body {
             .client-card-grid { grid-template-columns: 1fr; }
             .whatsapp-float { bottom: 18px; right: 18px; width: 50px; height: 50px; font-size: 26px; }
         }
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -332,7 +337,7 @@ body {
     <!-- Header / Navigation -->
     <header>
         <div class="logo">
-           <img src="/images/img2.jpeg" alt="Chirag Consultancy" style="height: 45px; width: auto; display: block;">
+           <img src="/images/img2.jpeg" alt="Chirag Consultancy - Healthcare Accreditation & Empanelment" style="height: 45px; width: auto; display: block;">
         </div>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
